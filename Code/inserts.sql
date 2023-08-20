@@ -1,5 +1,40 @@
 USE `sia_ing`;
 
+
+-- PERIODOS
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2010-1');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2010-2');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2011-1');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2011-2');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2012-1');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2012-2');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2013-1');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2013-2');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2014-1');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2014-2');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2015-1');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2015-2');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2016-1');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2016-2');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2017-1');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2017-2');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2018-1');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2018-2');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2019-1');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2019-2');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2020-1');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2020-2');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2021-1');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2021-2');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2022-1');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2022-2');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2023-1');
+INSERT INTO `sia_ing`.`periodo` (`referencia`) VALUES ('2023-2');
+
+
+
+
+
 -- FACULTADES
 INSERT INTO `sia_ing`.`facultad` (`nombre`) VALUES ('Ingeniería');
 INSERT INTO `sia_ing`.`facultad` (`nombre`) VALUES ('Medicina');
@@ -31,7 +66,7 @@ INSERT INTO `sia_ing`.`estudiante` (`nombre`) VALUES ('al11');
 INSERT INTO `sia_ing`.`estudiante` (`nombre`) VALUES ('al12');
 
 -- DOCENTE
-INSERT INTO `sia_ing`.`docente` (`facultad_idFacultad`, `nombre`) VALUES ('1', 'p0', );
+INSERT INTO `sia_ing`.`docente` (`facultad_idFacultad`, `nombre`) VALUES ('1', 'p0');
 INSERT INTO `sia_ing`.`docente` (`facultad_idFacultad`, `nombre`) VALUES ('1', 'p01');
 INSERT INTO `sia_ing`.`docente` (`facultad_idFacultad`, `nombre`) VALUES ('1', 'p02');
 INSERT INTO `sia_ing`.`docente` (`facultad_idFacultad`, `nombre`) VALUES ('1', 'p03');
@@ -46,7 +81,22 @@ INSERT INTO `sia_ing`.`docente` (`facultad_idFacultad`, `nombre`) VALUES ('1', '
 
 
 -- GRUPOS
-INSERT INTO `sia_ing`.`grupo` (`docente_idDocente`, `curso_idCurso`, `inicio`) VALUES ('1', '1', '2020-03-25');
-INSERT INTO `sia_ing`.`grupo` (`docente_idDocente`, `curso_idCurso`, `inicio`) VALUES ('2', '1', '2021-03-25');
-INSERT INTO `sia_ing`.`grupo` (`docente_idDocente`, `curso_idCurso`, `inicio`) VALUES ('3', '1', '2020-07-25');
-INSERT INTO `sia_ing`.`grupo` (`docente_idDocente`, `curso_idCurso`, `inicio`) VALUES ('4', '1', '2020-03-25');
+INSERT INTO `sia_ing`.`grupo` (`docente_idDocente`, `curso_idCurso`,`periodo_idPeriodo`) VALUES ('1', '1',28);
+INSERT INTO `sia_ing`.`grupo` (`docente_idDocente`, `curso_idCurso`,`periodo_idPeriodo`) VALUES ('2', '1',28);
+INSERT INTO `sia_ing`.`grupo` (`docente_idDocente`, `curso_idCurso`,`periodo_idPeriodo`) VALUES ('3', '1',28);
+INSERT INTO `sia_ing`.`grupo` (`docente_idDocente`, `curso_idCurso`,`periodo_idPeriodo`) VALUES ('4', '1',28);
+
+
+-- Calificaciones
+
+INSERT INTO `sia_ing`.`calificaciones` (`estudiante_idEstudiante`, `grupo_idGrupo`, `notaFinal`) VALUES ('1', '1', '39');
+INSERT INTO `sia_ing`.`calificaciones` (`estudiante_idEstudiante`, `grupo_idGrupo`, `notaFinal`) VALUES ('2', '1', '45');
+INSERT INTO `sia_ing`.`calificaciones` (`estudiante_idEstudiante`, `grupo_idGrupo`, `notaFinal`) VALUES ('3', '1', '23');
+INSERT INTO `sia_ing`.`calificaciones` (`estudiante_idEstudiante`, `grupo_idGrupo`, `notaFinal`) VALUES ('4', '1', '36');
+INSERT INTO `sia_ing`.`calificaciones` (`estudiante_idEstudiante`, `grupo_idGrupo`, `notaFinal`) VALUES ('5', '1', '43');
+INSERT INTO `sia_ing`.`calificaciones` (`estudiante_idEstudiante`, `grupo_idGrupo`, `notaFinal`) VALUES ('6', '1', '34');
+INSERT INTO `sia_ing`.`calificaciones` (`estudiante_idEstudiante`, `grupo_idGrupo`, `notaFinal`) VALUES ('7', '2', '20');
+INSERT INTO `sia_ing`.`calificaciones` (`estudiante_idEstudiante`, `grupo_idGrupo`, `notaFinal`) VALUES ('8', '2', '25');
+INSERT INTO `sia_ing`.`calificaciones` (`estudiante_idEstudiante`, `grupo_idGrupo`, `notaFinal`) VALUES ('9', '2', '15');
+INSERT INTO `sia_ing`.`calificaciones` (`estudiante_idEstudiante`, `grupo_idGrupo`, `notaFinal`) VALUES ('11', '3', '40');
+INSERT INTO `sia_ing`.`calificaciones` (`estudiante_idEstudiante`, `grupo_idGrupo`, `notaFinal`) VALUES ('12', '3', '45');

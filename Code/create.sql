@@ -1,5 +1,4 @@
 
-CREATE DATABASE sia_ing
 USE `sia_ing`;
 
 DROP TABLE IF EXISTS `calificaciones` ;
@@ -8,6 +7,7 @@ DROP TABLE IF EXISTS `docente` ;
 DROP TABLE IF EXISTS `curso` ;
 DROP TABLE IF EXISTS `estudiante` ;
 DROP TABLE IF EXISTS `facultad` ;
+DROP TABLE IF EXISTS `periodo` ;
 
 
 
@@ -40,11 +40,23 @@ CREATE TABLE IF NOT EXISTS `facultad` (
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS `periodo`(
+  `idPeriodo` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `referencia` VARCHAR(8) NOT NULL,
+  `inicio` DATE NULL,
+  `fin` DATE NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idPeriodo`)
+)
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_ci;
+
+
 CREATE TABLE IF NOT EXISTS `docente` (
   `idDocente` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `facultad_idFacultad` BIGINT(20) NOT NULL,
   `nombre` VARCHAR(45) NULL,
-  `activo` BOOLEAN NOT NULL DEFAULT 0,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idDocente`),
@@ -60,9 +72,7 @@ CREATE TABLE IF NOT EXISTS `grupo` (
   `docente_idDocente` BIGINT(20) UNSIGNED NOT NULL,
   `curso_idCurso` BIGINT(20) UNSIGNED NOT NULL,
   `numero` INT NULL,
-  `inicio` DATE NULL,
-  `fin` DATE NULL,
-  `periodo` VARCHAR(8) NULL,
+  `periodo_idPeriodo` BIGINT(20) UNSIGNED NOT NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idGrupo`),
@@ -71,10 +81,15 @@ CREATE TABLE IF NOT EXISTS `grupo` (
     REFERENCES `curso` (`idCurso`),
   CONSTRAINT `fk_grupo_docente1`
     FOREIGN KEY (`docente_idDocente`)
-    REFERENCES `docente` (`idDocente`)
+    REFERENCES `docente` (`idDocente`),
+  CONSTRAINT `fk_grupo_periodo1`
+    FOREIGN KEY (`periodo_idPeriodo`)
+    REFERENCES `periodo` (`idPeriodo`)
 )
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_unicode_ci;
+
+
 
 
 CREATE TABLE IF NOT EXISTS `calificaciones` (

@@ -1,17 +1,3 @@
-
-DELIMITER //
-CREATE TRIGGER actualizar_activo_eliminar AFTER DELETE ON grupo
-FOR EACH ROW
-BEGIN
-    DECLARE countGrupos INT;
-    SELECT COUNT(*) INTO countGrupos FROM grupo WHERE docente_idDocente = OLD.docente_idDocente;
-    IF countGrupos = 0 THEN
-        UPDATE docente
-        SET activo = 0
-        WHERE idDocente= OLD.docente_idDocente;
-    END IF;
-END; //
-
 DELIMITER //
 CREATE TRIGGER set_group_number
 BEFORE INSERT ON grupo
@@ -26,25 +12,40 @@ BEGIN
         SELECT COUNT(*)
         FROM grupo
         WHERE curso_idCurso = NEW.curso_idCurso
-        AND periodo = NEW.periodo
+        AND periodo_idPeriodo = NEW.periodo_idPeriodo
     );
 
     -- Actualizar el valor de 'numero'
     SET NEW.numero = curso_count + 1;
 
-    -- Calcular el periodo en base a la fecha de inicio
-    SET periodo_year = YEAR(NEW.inicio);
-    SET periodo_semester = CASE WHEN MONTH(NEW.inicio) <= 6 THEN 1 ELSE 2 END;
-    SET NEW.periodo = CONCAT(periodo_year, '-', periodo_semester);
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER set_period_dates
+BEFORE INSERT ON periodo
+FOR EACH ROW
+BEGIN
+    DECLARE year_part INT;
+    DECLARE month_part INT;
     
-    -- Calcular la fecha de fin si no se especifica
-    IF NEW.fin IS NULL OR NEW.fin = '' THEN
-        SET NEW.fin = DATE_ADD(NEW.inicio, INTERVAL 4 MONTH);
+    -- Obtener el año y el semestre de la referencia
+    SET year_part = SUBSTRING(NEW.referencia, 1, 4);
+    SET month_part = SUBSTRING(NEW.referencia, 6);
+
+    -- Calcular las fechas de inicio y fin en base a la referencia
+    IF NEW.inicio IS NULL THEN
+        IF month_part = '1' THEN
+            SET NEW.inicio = CONCAT(year_part, '-02-01');
+        ELSEIF month_part = '2' THEN
+            SET NEW.inicio = CONCAT(year_part, '-08-01');
+        END IF;
     END IF;
     
-    UPDATE docente
-    SET activo = 1
-    WHERE idDocente= NEW.docente_idDocente;
+    IF NEW.fin IS NULL THEN
+        SET NEW.fin = DATE_ADD(NEW.inicio, INTERVAL 4 MONTH);
+    END IF;
 END;
 //
 DELIMITER ;
