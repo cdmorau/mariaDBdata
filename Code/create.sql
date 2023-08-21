@@ -1,4 +1,6 @@
 
+DROP DATABASE IF EXISTS `sia_ing`;
+CREATE DATABASE `sia_ing`;
 USE `sia_ing`;
 
 DROP TABLE IF EXISTS `calificaciones` ;
@@ -43,8 +45,8 @@ COLLATE=utf8mb4_unicode_ci;
 CREATE TABLE IF NOT EXISTS `periodo`(
   `idPeriodo` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `referencia` VARCHAR(8) NOT NULL,
-  `inicio` DATE NULL,
-  `fin` DATE NULL,
+  `inicio` DATE,
+  `fin` DATE,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idPeriodo`)
@@ -110,7 +112,6 @@ CREATE TABLE IF NOT EXISTS `calificaciones` (
 )
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_unicode_ci;
-
 
 
 
